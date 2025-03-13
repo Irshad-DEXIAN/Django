@@ -48,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'myapp.middleware.RedirectAuthenticatedUserMiddleware',
+    'myapp.middleware.RestrictUnauthorizedUserMiddleware'
 ]
 
 ROOT_URLCONF = 'myapp.urls'
@@ -139,7 +141,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Logger config
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -153,3 +155,23 @@ LOGGING = {
         "level": "DEBUG",
     },
 }
+
+
+
+# Email config
+DEFAULT_FROM_EMAIL = 'your_email@example.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = 'e6e3af6023e6b3'
+EMAIL_HOST_PASSWORD = '816a6452db4490'
+
+
+# Media config
+import os
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+# Login_required config
+LOGIN_URL = '/login'

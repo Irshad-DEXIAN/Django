@@ -6,24 +6,7 @@
         <div class="d-flex gap-3 flex-column">
             <h3>Contact Form</h3>
 
-            {% comment %} -----------Error validation------------ {% endcomment %}
-            {% for field in form %}
-            {% if field.errors %}
-                <div class='col-12'>
-                    <span class='fw-bold'>{{field.label_tag}}</span>
-                    {% for error in field.errors %}
-                    <span class='text-danger'>{{error}}</span>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            {% endfor %}
-
-            {% comment %} -----------Success Message-------------- {% endcomment %}
-            {% if success_message %}
-            <div class = 'alert alert-success' role='alert'>
-                {{success_message}}
-            </div>
-            {% endif %}
+            {% include 'blog/includes/errors.html' %}
             
             <form method="post" class="row g-3">
                 {% csrf_token %}

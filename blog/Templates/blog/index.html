@@ -6,15 +6,22 @@
             <div class="col">
                 <h2 >{{blog_title}}</h2>
             </div>
-            <div class="col-3">
+            
+            
+
+            {% comment %} <div class="col-3">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search..." aria-label="Search">
                     <button class="btn btn-outline-light btn-primary " type="button" id="button-search">
                       <i class="bi bi-search"></i> <!-- Bootstrap Icons -->
                     </button>
                   </div>
-            </div>
+            </div> {% endcomment %}
         </div>
+
+        {% include 'blog/includes/errors.html' %}
+
+
         <div class="row m-3">
             {% if page_obj %}
 
@@ -24,13 +31,15 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <img src="{{post.img_url}}" class="img-fluid" alt="..." width="300" height="300">
+                                        <img src="{{post.formatted_img_url}}" class="img-fluid" alt="..." width="300" height="300">
                                     </div>
                                     <div class="col-md-8">
                                         <h5 class="card-title">{{post.title}}</h5>
                                         <p class="card-text">{{post.content|truncatechars:50}}</p>
                                         <div class="d-flex justify-content-between">
+                                            {% if perms.blog.view_post %}
                                             <a href="{% url 'blog:detail' slug=post.slug %}">Read More</a>
+                                            {% endif %}
                                             <a class="text-decoration-none text-dark fw-bold" href="#">{{post.category.name}}</a>
                                         </div>
                                     </div>
@@ -84,10 +93,7 @@
             {% else %}
             <p>No Posts Available</p>
             {% endif %}
+
         </div>
-        <div class="row">
-           
-        </div>
-        
 </div>
 {% endblock %}
